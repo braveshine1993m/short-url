@@ -79,7 +79,7 @@ class Builder
      *
      * @var string|null
      */
-    protected $url_prefix;
+    protected $urlPrefixKey;
 
     /**
      * The HTTP status code that will be used when
@@ -427,7 +427,7 @@ class Builder
      */
     public function urlPrefix(string $prefix): self
     {
-        $this->url_prefix = $prefix;
+        $this->urlPrefixKey = $prefix;
 
         return $this;
     }
@@ -553,6 +553,7 @@ class Builder
             'destination_url'                => $this->destinationUrl,
             'default_short_url'              => $this->buildDefaultShortUrl(),
             'url_key'                        => $this->urlKey,
+            'url_prefix'                        => $this->urlPrefixKey,
             'single_use'                     => $this->singleUse,
             'forward_query_params'           => $this->forwardQueryParams,
             'track_visits'                   => $this->trackVisits,
@@ -663,6 +664,7 @@ class Builder
     public function resetOptions(): self
     {
         $this->urlKey = null;
+        $this->urlPrefixKey = null;
         $this->singleUse = false;
         $this->secure = null;
         $this->forwardQueryParams = null;
