@@ -79,7 +79,7 @@ class Builder
      *
      * @var string|null
      */
-    protected $prefix;
+    protected $url_prefix;
 
     /**
      * The HTTP status code that will be used when
@@ -427,7 +427,7 @@ class Builder
      */
     public function urlPrefix(string $prefix): self
     {
-        $this->prefix = urlencode($prefix);
+        $this->url_prefix = $prefix;
 
         return $this;
     }

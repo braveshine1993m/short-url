@@ -44,7 +44,7 @@ class ShortURLController
      */
     public function __invokeWithPrefix(Request $request, Resolver $resolver, string $prefix, string $shortURLKey): RedirectResponse
     {
-        $shortURL = ShortURL::where('url_key', $shortURLKey)->where('prefix', $prefix)->firstOrFail();
+        $shortURL = ShortURL::where('url_key', $shortURLKey)->where('url_prefix', $prefix)->firstOrFail();
 
         $resolver->handleVisit(request(), $shortURL);
 

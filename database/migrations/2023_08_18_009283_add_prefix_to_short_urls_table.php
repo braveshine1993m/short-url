@@ -14,7 +14,7 @@ class UpdateShortUrlTableAddOptionToForwardQueryParams extends Migration
     public function up()
     {
         Schema::table('short_urls', function (Blueprint $table) {
-            $table->boolean('prefix')->after('destination_url')->nullable();
+            $table->string('url_prefix')->after('destination_url')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class UpdateShortUrlTableAddOptionToForwardQueryParams extends Migration
     public function down()
     {
         Schema::table('short_urls', function (Blueprint $table) {
-            $table->dropColumn(['prefix']);
+            $table->dropColumn(['url_prefix']);
         });
     }
 }
