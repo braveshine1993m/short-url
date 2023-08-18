@@ -33,6 +33,29 @@ class ShortURLController
     }
 
     /**
+     * Redirect the user to the intended destination URL. If the default
+     * route has been disabled in the config but the controller has
+     * been reached using that route, return HTTP 404.
+     *
+     * @param  Request  $request
+     * @param  Resolver  $resolver
+     * @param  string  $shortURLKey
+     * @return RedirectResponse
+     */
+    public function __invokeWithPrefix(Request $request, Resolver $resolver, string $prefix, string $shortURLKey): RedirectResponse
+    {
+        $shortURL = ShortURL::where('url_key', $shortURLKey)->where('prefix', $prefix)->firstOrFail();
+
+        $resolver->handleVisit(request(), $shortURL);
+
+        if ($shortURL->forward_query_params) {
+            return redirect($this->forwardQueryParams($request, $shortURL), $shortURL->redirect_status_code);
+        }
+
+        return redirect($shortURL->destination_url, $shortURL->redirect_status_code);
+    }
+
+    /**
      * Add the query parameters from the request to the end of the
      * destination URL that the user is to be forwarded to.
      *
