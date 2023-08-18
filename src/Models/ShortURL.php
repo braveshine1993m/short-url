@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int $id
  * @property string $destination_url
  * @property string $default_short_url
+ * @property string $url_prefix
  * @property string $url_key
  * @property bool $single_use
  * @property bool $forward_query_params
@@ -51,6 +52,7 @@ class ShortURL extends Model
     protected $fillable = [
         'destination_url',
         'default_short_url',
+        'url_prefix',
         'url_key',
         'single_use',
         'forward_query_params',
