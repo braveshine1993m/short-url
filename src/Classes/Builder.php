@@ -74,6 +74,14 @@ class Builder
     protected $urlKey;
 
     /**
+     * This can hold a custom URL prefix that might be
+     * explicitly set for this URL.
+     *
+     * @var string|null
+     */
+    protected $prefix;
+
+    /**
      * The HTTP status code that will be used when
      * redirecting the user.
      *
@@ -407,6 +415,19 @@ class Builder
     public function urlKey(string $key): self
     {
         $this->urlKey = urlencode($key);
+
+        return $this;
+    }
+
+    /**
+     * Explicitly set a URL prefix for this short URL.
+     *
+     * @param  string  $prefix
+     * @return $this
+     */
+    public function urlPrefix(string $prefix): self
+    {
+        $this->prefix = urlencode($prefix);
 
         return $this;
     }
